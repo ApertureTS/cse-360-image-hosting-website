@@ -9,6 +9,36 @@ from django.template import Context, Template
 from django.conf import settings
 from .forms import UploadFileForm
 from .models import UploadFile
+from imagekit import ImageSpec
+from imagekit.processors import ResizeToFill, Adjust
+
+class Thumbnail(ImageSpec):
+    processors = [ResizeToFill(100, 50)]
+    format = 'JPEG'
+    options = {'quality': 60}
+
+# def FilterImg(request)
+#     if request.method == 'POST':
+
+
+
+ class FilterImg(ImageSpec):
+    processors = Adjust(contrast=1.2, sharpness=1.1),
+    #brightness=1.3
+    format = 'JPEG'
+    options = {'quality': 100} 
+
+#should pass a file
+def changeBright(request):
+    if request.method == 'POST':
+        source_file = open('/user_dee-mann/elvis-duck.JPG')
+        image_generator = FilterImg(source=source_file)
+        result = image_generator.generate()
+        dest = open('avatar/test.jpg', 'w')
+        dest.write(result.read())
+        dest.close()
+    return render_to_response('dropzone-drag-drop.html', context_instance=RequestContext(request))
+
 
 # passes an HttpRequest through DraggingAndDropping
 def DraggingAndDropping(request):

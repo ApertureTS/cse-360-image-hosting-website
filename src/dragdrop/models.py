@@ -16,6 +16,8 @@ class UploadFile(models.Model):
 
 	def get_upload_path(self, filename):
 		return "user_"+str(self.user.username)+"/"+filename
+#		return str(self.user.username)+"_"+filename
+
 
 
 

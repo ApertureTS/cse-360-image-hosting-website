@@ -79,7 +79,7 @@ INSTALLED_APPS = (
     'dragdrop',
     'south', # Only if you're relying on South for migrations
     'imagekit',
-    'annoying',
+    #'annoying',
     # using ajax, this can possibly make things slightly easier
     # with images
     # 'django_ajax',
